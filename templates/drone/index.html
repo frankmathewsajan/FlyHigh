@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #2F4858;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #00A9A3;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .scroll-container {
+            overflow-x: scroll;
+            display: flex;
+            flex-wrap: nowrap;
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .section {
+            flex: 0 0 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: #24677A;
+            border: 1px solid #008894;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #72EA9F;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #d4f3ef;
+            margin-bottom: 15px;
+        }
+
+        .card button {
+            background-color: #30CAA6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .card button:hover {
+            background-color: #00A9A3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #2F4858;
+            color: #72EA9F;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.2rem;
+            }
+
+            .section {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(auto-fill, auto);
+            }
+
+            .card h3 {
+                font-size: 1rem;
+            }
+
+            .card p {
+                font-size: 0.8rem;
+            }
+
+            .card button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Drone Management
+</header>
+
+<div class="scroll-container">
+    <div class="section">
+        <div class="card">
+            <h3>Language Settings</h3>
+            <p>Configure the language preferences for your operations.</p>
+            <button onclick="alert('Language Settings Coming Soon')">Set Language</button>
+        </div>
+        <div class="card">
+            <h3>Map Settings</h3>
+            <p>Customize map views and details for precise navigation.</p>
+            <button onclick="alert('Map Settings Coming Soon')">Configure Map</button>
+        </div>
+        <div class="card">
+            <h3>Monitor Area</h3>
+            <p>Oversee specific regions for real-time tracking.</p>
+            <button onclick="alert('Monitor Area Coming Soon')">Monitor</button>
+        </div>
+        <div class="card">
+            <h3>Area Detection</h3>
+            <p>Identify and analyze designated areas effectively.</p>
+            <button onclick="alert('Area Detection Coming Soon')">Detect Area</button>
+        </div>
+        <div class="card">
+            <h3>Disease Detection</h3>
+            <p>Spot and diagnose crop diseases quickly.</p>
+            <button onclick="alert('Disease Detection Coming Soon')">Detect Diseases</button>
+        </div>
+        <div class="card">
+            <h3>Remedy and Affected Area</h3>
+            <p>Plan remedies and estimate affected regions accurately.</p>
+            <button onclick="alert('Remedy Settings Coming Soon')">Remedy Settings</button>
+        </div>
+    </div>
+    <div class="section">
+        <div class="card">
+            <h3>Crop Maturity Analysis</h3>
+            <p>Evaluate crop maturity levels for optimal harvest timing.</p>
+            <button onclick="alert('Crop Maturity Analysis Coming Soon')">Analyze Maturity</button>
+        </div>
+        <div class="card">
+            <h3>Draw Path for Spray</h3>
+            <p>Design efficient routes for spraying operations.</p>
+            <button onclick="alert('Draw Path Coming Soon')">Plan Route</button>
+        </div>
+        <div class="card">
+            <h3>Autonomous Flight and Spray</h3>
+            <p>Set viewpoints for automated spraying and flights.</p>
+            <button onclick="alert('Autonomous Flight Coming Soon')">Set Viewpoint</button>
+        </div>
+        <div class="card">
+            <h3>Surveillance</h3>
+            <p>Conduct day and night surveillance with multipurpose tools.</p>
+            <button onclick="alert('Surveillance Features Coming Soon')">Surveillance</button>
+        </div>
+        <div class="card">
+            <h3>Field Mapping</h3>
+            <p>Create detailed field maps for comprehensive analysis.</p>
+            <button onclick="alert('Field Mapping Coming Soon')">Map Fields</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2024 Drone Management. All rights reserved.
+</footer>
+
+</body>
+</html>
