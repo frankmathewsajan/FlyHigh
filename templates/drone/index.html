@@ -1,128 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drone Management</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #2F4858;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #00A9A3;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .scroll-container {
-            overflow-x: scroll;
-            display: flex;
-            flex-wrap: nowrap;
-            -ms-overflow-style: none; /* Internet Explorer 10+ */
-            scrollbar-width: none; /* Firefox */
-        }
-
-        .scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .section {
-            flex: 0 0 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, auto);
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .card {
-            background: #24677A;
-            border: 1px solid #008894;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            text-align: center;
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            color: #72EA9F;
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: #d4f3ef;
-            margin-bottom: 15px;
-        }
-
-        .card button {
-            background-color: #30CAA6;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-
-        .card button:hover {
-            background-color: #00A9A3;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #2F4858;
-            color: #72EA9F;
-            font-size: 0.9rem;
-            font-weight: 400;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                font-size: 1.2rem;
-            }
-
-            .section {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(auto-fill, auto);
-            }
-
-            .card h3 {
-                font-size: 1rem;
-            }
-
-            .card p {
-                font-size: 0.8rem;
-            }
-
-            .card button {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'drone/css/index.css' %}">
 </head>
 <body>
 
 <header>
-    Drone Management
+    <span>Drone Management</span>
+    <div class="scroll-indicator">
+        <span data-target="0"></span>
+        <span data-target="1"></span>
+    </div>
 </header>
 
 <div class="scroll-container">
@@ -187,9 +79,8 @@
     </div>
 </div>
 
-<footer>
-    &copy; 2024 Drone Management. All rights reserved.
-</footer>
+
+<script src="{% static 'drone/js/index.js' %}"></script>
 
 </body>
 </html>
