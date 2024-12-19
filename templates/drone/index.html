@@ -17,12 +17,24 @@
     </div>
 </header>
 
+<div id="language-modal" class="modal card">
+    <div class="modal-content">
+        <h3>Select Your Language</h3>
+        <div style="display: flex; justify-content: space-between">
+            <button data-language="en">English</button>
+            <button data-language="hi">हिंदी</button>
+            <button data-language="te">తెలుగు</button>
+        </div>
+    </div>
+</div>
+
+
 <div class="scroll-container">
     <div class="section">
         <div class="card">
             <h3>Language Settings</h3>
             <p>Configure the language preferences for your operations.</p>
-            <button onclick="alert('Language Settings Coming Soon')">Set Language</button>
+            <button id="language-settings">Set Language</button>
         </div>
         <div class="card">
             <h3>Map Settings</h3>
