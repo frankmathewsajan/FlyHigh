@@ -6,16 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drone Management</title>
     <link rel="stylesheet" href="{% static 'drone/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'drone/css/pagination.css' %}">
+    <script src="https://kit.fontawesome.com/35c881c056.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<header>
-    <span>Drone Management</span>
-    <div class="scroll-indicator">
-        <span data-target="0"></span>
-        <span data-target="1"></span>
+<nav class="navbar">
+    <span style="font-size: smaller">Drone Management</span>
+    <div class="hamburger-menu">
+        <i class="fas fa-bars"></i>
+        <div class="dropdown-menu">
+            <button id="language-settings">Language Settings</button>
+            <button onclick="alert('Map Settings Coming Soon')">Map Settings</button>
+        </div>
     </div>
-</header>
+</nav>
 
 <div id="language-modal" class="modal card">
     <div class="modal-content">
@@ -28,71 +33,91 @@
     </div>
 </div>
 
-
 <div class="scroll-container">
-    <div class="section">
-        <div class="card">
-            <h3>Language Settings</h3>
-            <p>Configure the language preferences for your operations.</p>
-            <button id="language-settings">Set Language</button>
-        </div>
-        <div class="card">
-            <h3>Map Settings</h3>
-            <p>Customize map views and details for precise navigation.</p>
-            <button onclick="alert('Map Settings Coming Soon')">Configure Map</button>
-        </div>
-        <div class="card">
+    <!-- Sections go here -->
+    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');" loading="lazy">
+        <div class="overlay-content">
             <h3>Monitor Area</h3>
             <p>Oversee specific regions for real-time tracking.</p>
-            <button onclick="alert('Monitor Area Coming Soon')">Monitor</button>
+            <p>Crop Maturity Analysis: Evaluate crop maturity levels for optimal harvest timing.</p>
         </div>
-        <div class="card">
-            <h3>Area Detection</h3>
-            <p>Identify and analyze designated areas effectively.</p>
-            <button onclick="alert('Area Detection Coming Soon')">Detect Area</button>
-        </div>
-        <div class="card">
-            <h3>Disease Detection</h3>
-            <p>Spot and diagnose crop diseases quickly.</p>
-            <button onclick="alert('Disease Detection Coming Soon')">Detect Diseases</button>
-        </div>
-        <div class="card">
-            <h3>Remedy and Affected Area</h3>
-            <p>Plan remedies and estimate affected regions accurately.</p>
-            <button onclick="alert('Remedy Settings Coming Soon')">Remedy Settings</button>
+        <div class="pagination">
+            <button class="prev" onclick="navigate(-1)">&#10094;</button>
+            <span class="page-indicator">1/4</span>
+            <button class="next" onclick="navigate(1)">&#10095;</button>
         </div>
     </div>
-    <div class="section">
-        <div class="card">
-            <h3>Crop Maturity Analysis</h3>
-            <p>Evaluate crop maturity levels for optimal harvest timing.</p>
-            <button onclick="alert('Crop Maturity Analysis Coming Soon')">Analyze Maturity</button>
+    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
+        <div class="overlay-content">
+            <h3>Disease Detection</h3>
+            <p>Spot and diagnose crop diseases quickly.</p>
+            <p>Remedy and Affected Area analysis: Plan remedies and estimate affected regions accurately.</p>
         </div>
-        <div class="card">
+        <div class="pagination">
+            <button class="prev" onclick="navigate(-1)">&#10094;</button>
+            <span class="page-indicator">2/4</span>
+            <button class="next" onclick="navigate(1)">&#10095;</button>
+        </div>
+    </div>
+    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
+        <div class="overlay-content">
             <h3>Draw Path for Spray</h3>
             <p>Design efficient routes for spraying operations.</p>
-            <button onclick="alert('Draw Path Coming Soon')">Plan Route</button>
+            <p>Autonomous Flight and Spray: Set viewpoints for automated spraying and flights.</p>
+            <p>Field Mapping: Create detailed field maps for comprehensive analysis.</p>
         </div>
-        <div class="card">
-            <h3>Autonomous Flight and Spray</h3>
-            <p>Set viewpoints for automated spraying and flights.</p>
-            <button onclick="alert('Autonomous Flight Coming Soon')">Set Viewpoint</button>
+        <div class="pagination">
+            <button class="prev" onclick="navigate(-1)">&#10094;</button>
+            <span class="page-indicator">3/4</span>
+            <button class="next" onclick="navigate(1)">&#10095;</button>
         </div>
-        <div class="card">
+    </div>
+    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
+        <div class="overlay-content">
             <h3>Surveillance</h3>
             <p>Conduct day and night surveillance with multipurpose tools.</p>
-            <button onclick="alert('Surveillance Features Coming Soon')">Surveillance</button>
         </div>
-        <div class="card">
-            <h3>Field Mapping</h3>
-            <p>Create detailed field maps for comprehensive analysis.</p>
-            <button onclick="alert('Field Mapping Coming Soon')">Map Fields</button>
+        <div class="pagination">
+            <button class="prev" onclick="navigate(-1)">&#10094;</button>
+            <span class="page-indicator">4/4</span>
+            <button class="next" onclick="navigate(1)">&#10095;</button>
         </div>
     </div>
 </div>
 
-
 <script src="{% static 'drone/js/index.js' %}"></script>
+<script>
+    let currentPage = 1;
+    const totalPages = document.querySelectorAll('.section').length;
+
+    function updatePageIndicator() {
+        document.querySelector('.page-indicator').textContent = `${currentPage}/${totalPages}`;
+    }
+
+    function navigate(direction) {
+        const sections = document.querySelectorAll('.section');
+        sections[currentPage - 1].style.display = 'none';
+        currentPage += direction;
+
+        if (currentPage < 1) {
+            currentPage = totalPages;
+        } else if (currentPage > totalPages) {
+            currentPage = 1;
+        }
+
+        sections[currentPage - 1].style.display = 'block';
+        updatePageIndicator();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach((section, index) => {
+            if (index !== 0) section.style.display = 'none';
+        });
+        updatePageIndicator();
+    });
+
+</script>
 
 </body>
 </html>

@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #2F4858;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #00A9A3;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.scroll-container {
+    overflow-x: scroll;
+    display: flex;
+    flex-wrap: nowrap;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.section {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: #24677A;
+    border: 1px solid #008894;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensures full height of the card */
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #72EA9F;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #d4f3ef;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Ensures the description takes up available space */
+    text-align: center; /* Centering the description */
+}
+
+.card button {
+    background-color: #30CAA6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    align-self: center; /* Ensures the button is centered */
+    transition: background-color 0.3s;
+}
+
+.card button:hover {
+    background-color: #00A9A3;
+}
+
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #2F4858;
+    color: #72EA9F;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    header {
+        font-size: 1.2rem;
+    }
+
+    .section {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto-fill, auto);
+    }
+
+    .card h3 {
+        font-size: 1rem;
+    }
+
+    .card p {
+        font-size: 0.8rem;
+    }
+
+    .card button {
+        font-size: 0.9rem;
+    }
+}
+
+.scroll-indicator {
+    display: flex;
+    justify-content: center;
+    margin-top: 3px;
+    gap: 8px;
+    overflow: hidden;
+    border: 2px solid #24677A;
+    border-radius: 10px;
+    padding: 2px;
+    z-index: 2;
+    float: right;
+}
+
+.scroll-indicator span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #72EA9F;
+    border-radius: 50%;
+    border: 2px solid #24677A; /* Border for visibility */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-indicator span.active {
+    background-color: #00A9A3;
+    transform: scale(1.5); /* Enlarge the active dot */
+    border-color: #00A9A3; /* Highlight border for active dot */
+}
+
+.scroll-indicator span.inactive {
+    background-color: #72EA9F;
+    border-color: #24677A; /* Default border for inactive dot */
+}
+
+header {
+    display: flex;
+    position: sticky;
+    justify-content: space-between
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    padding-top: 10pc;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 75%;
+    max-width: 400px;
+}
+
+
+body.modal-open {
+    overflow: hidden;
+}
