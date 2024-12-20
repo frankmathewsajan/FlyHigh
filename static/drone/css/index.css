@@ -1,4 +1,4 @@
-/* Same initial styles */
+/* Reset styles */
 * {
     margin: 0;
     padding: 0;
@@ -14,56 +14,70 @@ body {
     overflow: hidden;
 }
 
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    height: 65px;
+    background-color: #24677A;
+}
+
+#logo {
+    height: 70px;
+    width: 70px;
+    padding: -10px;
+    display: inline-block;
+}
 .section:nth-child(1){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/map.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/map.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .section:nth-child(2){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/aream.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/aream.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .section:nth-child(3){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/photo-1473968512647-3e447244af8f.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/photo-1473968512647-3e447244af8f.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .section:nth-child(4){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/disease.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/disease.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .section:nth-child(5){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/med.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/med.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .section:nth-child(6){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/maturity.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/maturity.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .section:nth-child(7){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/spray.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/spray.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .section:nth-child(8){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/flight.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/flight.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .section:nth-child(9){
-    background-image:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../img/surveilance.jpg);
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/surveilance.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -71,60 +85,80 @@ body {
 
 
 
-header {
-    color: white;
-    padding: 15px 20px;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 600;
+.header-icons {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    height: 70px;
 }
 
-.hamburger-menu img {
-    width: 30px;
+.icon {
+    margin: 0 15px;
     cursor: pointer;
-
 }
 
-.sidebar {
+.icon img {
+    width: 30px;
+}
+
+/* Language and Settings Box */
+.language-box, .settings-box {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #24677A;
-    padding: 20px;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
+.language-box-content, .settings-box-content {
+    background-color: #24677A;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    max-width: 350px;
+    width: 100%;
 }
 
-.sidebar ul li {
-    margin: 20px 0;
-    font-size: 1.2rem;
-    color: #ffffff;
+.language-box h3, .settings-box h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.language-box button, .settings-box button {
+    background-color: #30CAA6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
     cursor: pointer;
+    margin-top: 10px;
+    font-size: 1.1rem;
 }
 
-.sidebar .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+.language-box button:hover, .settings-box button:hover {
+    background-color: #00A9A3;
+}
+
+.exit-btn {
     background: transparent;
     border: none;
     cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
-.sidebar .close-btn img {
+.exit-btn img {
     width: 20px;
 }
 
+/* Scrollable Container */
 .scroll-container {
     display: flex;
     flex-wrap: nowrap;
@@ -138,7 +172,8 @@ header {
 .section {
     flex: 0 0 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Stack title and card vertically */
+    justify-content: flex-start;
     align-items: center;
     scroll-snap-align: start;
     height: 100vh;
@@ -147,6 +182,18 @@ header {
     position: relative;
 }
 
+/* Title Positioning */
+.section-title {
+    position: absolute;
+    top: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #72EA9F;
+    margin: 0;
+    z-index: 1;
+}
+
+/* Card Styles */
 .card {
     background: #24677A;
     border: 1px solid #008894;
@@ -156,24 +203,82 @@ header {
     text-align: center;
     max-width: 400px;
     width: 100%;
+    margin-top: 60px; /* Add margin-top to avoid overlap with the title */
 }
 
+/* Card Button Hover Effect */
+.card button:hover {
+    background-color: #00A9A3;
+}
+
+/* Section Background Images */
+.section:nth-child(1){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/map.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section:nth-child(2){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/aream.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section:nth-child(3){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/photo-1473968512647-3e447244af8f.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section:nth-child(4){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/disease.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section:nth-child(5){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/med.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section:nth-child(6){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/maturity.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section:nth-child(7){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/spray.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section:nth-child(8){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/flight.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section:nth-child(9){
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/surveilance.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Card Content Styles */
 .card h3 {
     margin: 0;
     color: #72EA9F;
     font-size: 1.2rem;
     font-weight: 500;
-    position: absolute;
-    top: 20px;
-    left: 20px;
 }
 
 .card p {
     font-size: 0.9rem;
     color: #d4f3ef;
     margin-top: 50px;
-    text-align: center;
-    flex-grow: 1;
 }
 
 .card button {
@@ -184,12 +289,52 @@ header {
     padding: 10px 15px;
     cursor: pointer;
     font-size: 1rem;
-    align-self: center;
+    margin-top: 40px;
     transition: background-color 0.3s;
-    margin-top:40px;
+}
+.card button:hover {
+    background-color: #00A9A3;
+}
+/* Pagination Dots Styles */
+.pagination-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
 }
 
-.card button:hover {
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #99CCFF; /* Light blue for unselected dots */
+    transition: background-color 0.3s, transform 0.3s ease-in-out;
+   
+}
+
+.dot.active {
+    background-color: #0066CC; /* Dark blue for the active dot */
+    transform: scale(1.5); /* Scale effect on active dot for better highlight */
+    border: none;
+}
+
+.dot:last-child {
+    background-color: transparent;
+    border: none;
+
+}
+.dot:last-child:active{
+    background-color: transparent;
+    border: none;
+}
+
+.dot:hover {
+    opacity: 1;
     background-color: #00A9A3;
 }
 
@@ -204,7 +349,6 @@ header {
 
     .card h3 {
         font-size: 1.5rem;
-        text-align: center;
     }
 
     .card p {
@@ -215,3 +359,4 @@ header {
         font-size: 0.9rem;
     }
 }
+
