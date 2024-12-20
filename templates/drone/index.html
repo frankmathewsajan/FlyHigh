@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drone Management</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'drone/css/index.css' %}">
 </head>
 <body>
@@ -40,85 +40,46 @@
 <!-- Settings Box -->
 <div class="settings-box" id="settings-box">
     <div class="settings-box-content">
-        <h3>Settings</h3>
+        <h3>Map Settings</h3>
         <button class="exit-btn" id="settings-exit-btn">
             <img src="{% static 'drone/img/exit.svg' %}" alt="Exit">
         </button>
     </div>
 </div>
 
-<div class="scroll-container">
-    <!-- Monitor Area -->
-    <div class="section" id="aream">
-        <h3 class="section-title">Monitor Area</h3>
+<div class="scroll-container"><!-- Area Monitoring and Crop Maturity Analysis -->
+    <div class="section" id="monitor-maturity">
+        <h3 class="section-title">AI-Powered Real-Time Monitoring, Disease Detection, and Crop Maturity Analysis</h3>
         <div class="card">
-            <p>Oversee specific regions for real-time tracking.</p>
-            <button>Monitor</button>
+            <p>Leverage AI to monitor crop health and development across specific regions in real-time. Evaluate crop
+                maturity precisely to identify the ideal harvest window. Detect diseases early, estimate affected areas,
+                and implement tailored remedies for better yields.</p>
+            <button>Monitor and Analyze</button>
         </div>
     </div>
 
-    <!-- Area Detection -->
-    <div class="section" id="aread">
-        <h3 class="section-title">Area Detection</h3>
+    <!-- Spray Planning and Autonomous Flight -->
+    <div class="section" id="spray-flight">
+        <h3 class="section-title">Route Optimization for Spraying and Autonomous Drone Flights</h3>
         <div class="card">
-            <p>Identify and analyze designated areas effectively.</p>
-            <button>Detect Area</button>
-        </div>
-    </div>
-
-    <!-- Disease Detection -->
-    <div class="section" id="disease">
-        <h3 class="section-title">Disease Detection</h3>
-        <div class="card">
-            <p>Spot and diagnose crop diseases quickly.</p>
-            <button>Detect Diseases</button>
-        </div>
-    </div>
-
-    <!-- Remedy Settings -->
-    <div class="section" id="med">
-        <h3 class="section-title">Remedy and Affected Area</h3>
-        <div class="card">
-            <p>Plan remedies and estimate affected regions accurately.</p>
-            <button>Remedy Settings</button>
-        </div>
-    </div>
-
-    <!-- Crop Maturity Analysis -->
-    <div class="section" id="maturity">
-        <h3 class="section-title">Crop Maturity Analysis</h3>
-        <div class="card">
-            <p>Evaluate crop maturity levels for optimal harvest timing.</p>
-            <button>Analyze Maturity</button>
-        </div>
-    </div>
-
-    <!-- Draw Path -->
-    <div class="section" id="spray">
-        <h3 class="section-title">Draw Path for Spray</h3>
-        <div class="card">
-            <p>Design efficient routes for spraying operations.</p>
+            <p>Utilize AI for efficient route planning, enabling precise and automated spraying operations. Define key
+                waypoints for drones to perform autonomous and optimized spraying with minimal resource waste.</p>
             <button>Plan Route</button>
-        </div>
-    </div>
-
-    <!-- Autonomous Flight -->
-    <div class="section" id="flight">
-        <h3 class="section-title">Autonomous Flight and Spray</h3>
-        <div class="card">
-            <p>Set viewpoints for automated spraying and flights.</p>
-            <button>Set Viewpoint</button>
         </div>
     </div>
 
     <!-- Surveillance -->
     <div class="section" id="surveillance">
-        <h3 class="section-title">Surveillance</h3>
-        <div class="card">
-            <p>Conduct day and night surveillance with multipurpose tools.</p>
-            <button>Surveillance</button>
+        <div class="card margin-top-0">
+            <h1 style="font-size: 1.5rem;color: #72EA9F;" >
+                Day and Night Surveillance with Advanced AI Tools
+            </h1>
+            <p style="margin-top:10px">Enhance security with AI-driven tools for continuous day and night surveillance, providing comprehensive insights for better agricultural management.</p>
         </div>
+        <a style="font-size: 1.8rem;">Start <i class="fa-solid fa-caret-right"></i></a>
     </div>
+
+
 </div>
 <!-- Pagination Dots -->
 <div class="pagination-dots">
@@ -126,84 +87,79 @@
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
 </div>
 
 <script>
- document.addEventListener('DOMContentLoaded', () => {
-    // Elements for language and settings boxes
-    const languageIcon = document.getElementById('language-icon');
-    const settingsIcon = document.getElementById('settings-icon');
-    const languageBox = document.getElementById('language-box');
-    const settingsBox = document.getElementById('settings-box');
-    const languageExitBtn = document.getElementById('language-exit-btn');
-    const settingsExitBtn = document.getElementById('settings-exit-btn');
-    
-    // Open Language Box
-    languageIcon.addEventListener('click', () => {
-        languageBox.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Disable scroll when language box is open
-    });
+    document.addEventListener('DOMContentLoaded', () => {
+        // Elements for language and settings boxes
+        const languageIcon = document.getElementById('language-icon');
+        const settingsIcon = document.getElementById('settings-icon');
+        const languageBox = document.getElementById('language-box');
+        const settingsBox = document.getElementById('settings-box');
+        const languageExitBtn = document.getElementById('language-exit-btn');
+        const settingsExitBtn = document.getElementById('settings-exit-btn');
 
-    // Close Language Box
-    languageExitBtn.addEventListener('click', () => {
-        languageBox.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Enable scroll again
-    });
-
-    // Open Settings Box
-    settingsIcon.addEventListener('click', () => {
-        settingsBox.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Disable scroll when settings box is open
-    });
-
-    // Close Settings Box
-    settingsExitBtn.addEventListener('click', () => {
-        settingsBox.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Enable scroll again
-    });
-
-    // Pagination Dots Implementation
-    const scrollContainer = document.querySelector('.scroll-container');
-    const dots = document.querySelectorAll('.dot');
-    const sections = document.querySelectorAll('.section');
-
-    // Function to update active dot based on scroll position
-    function updateActiveDot() {
-        // Calculate the index of the section currently in view
-        const index = Math.floor(scrollContainer.scrollLeft / window.innerWidth);
-        
-        // Update the active dot
-        dots.forEach((dot, i) => {
-            if (i === index) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
+        // Open Language Box
+        languageIcon.addEventListener('click', () => {
+            languageBox.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Disable scroll when language box is open
         });
-    }
 
-    // Listen to scroll events on the scroll container to update active dot
-    scrollContainer.addEventListener('scroll', updateActiveDot);
+        // Close Language Box
+        languageExitBtn.addEventListener('click', () => {
+            languageBox.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Enable scroll again
+        });
 
-    // Add click event listener to each dot to allow for manual dot clicking (navigation)
-    dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-            // Scroll to the corresponding section
-            scrollContainer.scrollTo({
-                left: window.innerWidth * i,
-                behavior: 'smooth'
+        // Open Settings Box
+        settingsIcon.addEventListener('click', () => {
+            settingsBox.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Disable scroll when settings box is open
+        });
+
+        // Close Settings Box
+        settingsExitBtn.addEventListener('click', () => {
+            settingsBox.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Enable scroll again
+        });
+
+        // Pagination Dots Implementation
+        const scrollContainer = document.querySelector('.scroll-container');
+        const dots = document.querySelectorAll('.dot');
+        const sections = document.querySelectorAll('.section');
+
+        // Function to update active dot based on scroll position
+        function updateActiveDot() {
+            // Calculate the index of the section currently in view
+            const index = Math.floor(scrollContainer.scrollLeft / window.innerWidth);
+
+            // Update the active dot
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Listen to scroll events on the scroll container to update active dot
+        scrollContainer.addEventListener('scroll', updateActiveDot);
+
+        // Add click event listener to each dot to allow for manual dot clicking (navigation)
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                // Scroll to the corresponding section
+                scrollContainer.scrollTo({
+                    left: window.innerWidth * i,
+                    behavior: 'smooth'
+                });
             });
         });
-    });
 
-    // Set initial active dot
-    updateActiveDot();
-});
+        // Set initial active dot
+        updateActiveDot();
+    });
 
 </script>
 

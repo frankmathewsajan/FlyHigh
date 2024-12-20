@@ -28,61 +28,69 @@ header {
     padding: -10px;
     display: inline-block;
 }
-.section:nth-child(1){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/map.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(2){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/aream.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(3){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/photo-1473968512647-3e447244af8f.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(4){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/disease.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(5){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/med.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(6){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/maturity.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(7){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/spray.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(8){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/flight.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(9){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/surveilance.jpg);
+
+.section:nth-child(1) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/map.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+.section:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/aream.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section:nth-child(3) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/photo-1473968512647-3e447244af8f.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section:nth-child(4) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/disease.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section:nth-child(5) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/med.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section:nth-child(6) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/maturity.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section:nth-child(7) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/spray.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section:nth-child(8) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/flight.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section:nth-child(9) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/surveilance.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 
 .header-icons {
@@ -173,7 +181,7 @@ header {
     flex: 0 0 100%;
     display: flex;
     flex-direction: column; /* Stack title and card vertically */
-    justify-content: flex-start;
+    justify-content: space-evenly;
     align-items: center;
     scroll-snap-align: start;
     height: 100vh;
@@ -191,19 +199,27 @@ header {
     color: #72EA9F;
     margin: 0;
     z-index: 1;
+    text-align: left;
+    padding: 20px;
 }
 
+.position-relative {
+    position: relative!important;
+}
+.margin-top-0 {
+    margin-top: 0!important;
+}
 /* Card Styles */
 .card {
-    background: #24677A;
-    border: 1px solid #008894;
+    background: rgba(0, 0, 0, 0.5);
+
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    text-align: center;
+    padding: 20px;
+    text-align: left;
     max-width: 400px;
     width: 100%;
-    margin-top: 60px; /* Add margin-top to avoid overlap with the title */
+    margin-top: 60px;
 }
 
 /* Card Button Hover Effect */
@@ -212,60 +228,29 @@ header {
 }
 
 /* Section Background Images */
-.section:nth-child(1){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/map.jpg);
+.section:nth-child(1) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/map.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.section:nth-child(2){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/aream.jpg);
+
+.section:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/aream.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.section:nth-child(3){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/photo-1473968512647-3e447244af8f.jpg);
+
+.section:nth-child(3) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(../img/surveillance.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    justify-content: space-between !important;
 }
-.section:nth-child(4){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/disease.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(5){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/med.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(6){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/maturity.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(7){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/spray.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(8){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/flight.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.section:nth-child(9){
-    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../img/surveilance.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+
 
 /* Card Content Styles */
 .card h3 {
@@ -292,9 +277,11 @@ header {
     margin-top: 40px;
     transition: background-color 0.3s;
 }
+
 .card button:hover {
     background-color: #00A9A3;
 }
+
 /* Pagination Dots Styles */
 .pagination-dots {
     position: absolute;
@@ -314,7 +301,7 @@ header {
     border-radius: 50%;
     background-color: #99CCFF; /* Light blue for unselected dots */
     transition: background-color 0.3s, transform 0.3s ease-in-out;
-   
+
 }
 
 .dot.active {
@@ -328,7 +315,8 @@ header {
     border: none;
 
 }
-.dot:last-child:active{
+
+.dot:last-child:active {
     background-color: transparent;
     border: none;
 }
