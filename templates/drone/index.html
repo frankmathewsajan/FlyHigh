@@ -71,13 +71,63 @@
     <!-- Surveillance -->
     <div class="section" id="surveillance">
         <div class="card margin-top-0">
-            <h1 style="font-size: 1.5rem;color: #72EA9F;" >
+            <h1 style="font-size: 1.5rem;color: #72EA9F;">
                 Day and Night Surveillance with Advanced AI Tools
             </h1>
-            <p style="margin-top:10px">Enhance security with AI-driven tools for continuous day and night surveillance, providing comprehensive insights for better agricultural management.</p>
+            <p style="margin-top:10px">Day & night, monitoring & analysis with AI, provides insights for better
+                agricultural management.</p>
         </div>
-        <a style="font-size: 1.8rem;margin-bottom: 6rem;left:0;">Start <i class="fa-solid fa-caret-right"></i></a>
+        <div class="swipe-container">
+            <a class="bottom-right" id="swipeUpLink">
+                <i class="fa-solid fa-caret-up"></i><br>
+                Swipe Up
+            </a>
+            <div class="swipe-path"></div>
+        </div>
+
+
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const swipeLink = document.getElementById('swipeUpLink');
+            const swipePath = document.querySelector('.swipe-path');
+            const swipeContainer = document.querySelector('.swipe-container');
+            let startY = 0;
+            let endY = 0;
+
+            const maxSwipeDistance = swipePath.offsetHeight; // Max height to swipe
+
+            swipeLink.addEventListener('touchstart', function (e) {
+                startY = e.touches[0].clientY; // Record the start Y position
+            });
+
+            swipeLink.addEventListener('touchmove', function (e) {
+                endY = e.touches[0].clientY; // Record the end Y position
+                const swipeDistance = Math.max(0, startY - endY);
+
+                // Move the button proportionally to the swipe distance, within limits
+                const progress = Math.min(swipeDistance / maxSwipeDistance, 1);
+                swipeLink.style.bottom = `calc(30% + ${progress * 30}%)`; // Adjust based on path height
+                swipeLink.style.transform = `scale(${1 + progress * 0.3})`; // Smooth scaling
+            });
+
+            swipeLink.addEventListener('touchend', function () {
+                const swipeDistance = Math.max(0, startY - endY);
+                if (swipeDistance >= maxSwipeDistance * 0.7) { // Trigger at 90% swipe distance
+                    swipeLink.classList.add('move-up'); // Add class for animation
+
+                    // Redirect after animation ends
+                    setTimeout(() => {
+                        window.location.assign("{% url 'map' %}"); // Replace with your target URL
+                    }, 400); // Matches the CSS transition duration
+                } else {
+                    // Reset position if swipe wasn't sufficient
+                    swipeLink.style.bottom = '30%';
+                    swipeLink.style.transform = 'scale(1)';
+                }
+            });
+        });
+    </script>
 
 
 </div>
