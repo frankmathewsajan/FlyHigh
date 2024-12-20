@@ -5,118 +5,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drone Management</title>
+
+
     <link rel="stylesheet" href="{% static 'drone/css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'drone/css/pagination.css' %}">
-    <script src="https://kit.fontawesome.com/35c881c056.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<nav class="navbar">
-    <span style="font-size: smaller">Drone Management</span>
-    <div class="hamburger-menu">
-        <i class="fas fa-bars"></i>
-        <div class="dropdown-menu">
-            <button id="language-settings">Language Settings</button>
-            <button onclick="alert('Map Settings Coming Soon')">Map Settings</button>
-        </div>
+<header>
+    <div class="hamburger-menu" id="hamburger-menu">
+        <img src="{% static 'drone/img/hamburger-menu.svg' %}" alt="Menu" id="hamburger-icon">
     </div>
-</nav>
+</header>
 
-<div id="language-modal" class="modal card">
-    <div class="modal-content">
-        <h3>Select Your Language</h3>
-        <div style="display: flex; justify-content: space-between">
-            <button data-language="en">English</button>
-            <button data-language="hi">हिंदी</button>
-            <button data-language="te">తెలుగు</button>
-        </div>
-    </div>
+<!-- Sidebar for Hamburger Menu -->
+<div class="sidebar" id="sidebar">
+    <button class="close-btn" id="close-btn">
+        <img src="{% static 'drone/img/exit.svg' %}" alt="Exit">
+    </button>
+    <ul>
+        <li id="language-settings">Language Settings</li>
+        <li id="map-settings">Map Settings</li>
+    </ul>
 </div>
 
 <div class="scroll-container">
-    <!-- Sections go here -->
-    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');" loading="lazy">
-        <div class="overlay-content">
+    
+
+    <!-- Monitor Area -->
+    <div class="section" id="aream">
+        <div class="card">
             <h3>Monitor Area</h3>
             <p>Oversee specific regions for real-time tracking.</p>
-            <p>Crop Maturity Analysis: Evaluate crop maturity levels for optimal harvest timing.</p>
-        </div>
-        <div class="pagination">
-            <button class="prev" onclick="navigate(-1)">&#10094;</button>
-            <span class="page-indicator">1/4</span>
-            <button class="next" onclick="navigate(1)">&#10095;</button>
+            <button>Monitor</button>
         </div>
     </div>
-    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
-        <div class="overlay-content">
+
+    <!-- Area Detection -->
+    <div class="section" id="aread">
+        <div class="card">
+            <h3>Area Detection</h3>
+            <p>Identify and analyze designated areas effectively.</p>
+            <button>Detect Area</button>
+        </div>
+    </div>
+
+    <!-- Disease Detection -->
+    <div class="section" id="disease">
+        <div class="card">
             <h3>Disease Detection</h3>
             <p>Spot and diagnose crop diseases quickly.</p>
-            <p>Remedy and Affected Area analysis: Plan remedies and estimate affected regions accurately.</p>
-        </div>
-        <div class="pagination">
-            <button class="prev" onclick="navigate(-1)">&#10094;</button>
-            <span class="page-indicator">2/4</span>
-            <button class="next" onclick="navigate(1)">&#10095;</button>
+            <button>Detect Diseases</button>
         </div>
     </div>
-    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
-        <div class="overlay-content">
+
+    <!-- Remedy Settings -->
+    <div class="section" id="med">
+        <div class="card">
+            <h3>Remedy and Affected Area</h3>
+            <p>Plan remedies and estimate affected regions accurately.</p>
+            <button>Remedy Settings</button>
+        </div>
+    </div>
+
+    <!-- Crop Maturity Analysis -->
+    <div class="section" id="maturity">
+        <div class="card">
+            <h3>Crop Maturity Analysis</h3>
+            <p>Evaluate crop maturity levels for optimal harvest timing.</p>
+            <button>Analyze Maturity</button>
+        </div>
+    </div>
+
+    <!-- Draw Path -->
+    <div class="section" id="spray">
+        <div class="card">
             <h3>Draw Path for Spray</h3>
             <p>Design efficient routes for spraying operations.</p>
-            <p>Autonomous Flight and Spray: Set viewpoints for automated spraying and flights.</p>
-            <p>Field Mapping: Create detailed field maps for comprehensive analysis.</p>
-        </div>
-        <div class="pagination">
-            <button class="prev" onclick="navigate(-1)">&#10094;</button>
-            <span class="page-indicator">3/4</span>
-            <button class="next" onclick="navigate(1)">&#10095;</button>
+            <button>Plan Route</button>
         </div>
     </div>
-    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
-        <div class="overlay-content">
+
+    <!-- Autonomous Flight -->
+    <div class="section" id="flight">
+        <div class="card">
+            <h3>Autonomous Flight and Spray</h3>
+            <p>Set viewpoints for automated spraying and flights.</p>
+            <button>Set Viewpoint</button>
+        </div>
+    </div>
+
+    <!-- Surveillance -->
+    <div class="section" id="surveillance">
+        <div class="card">
             <h3>Surveillance</h3>
             <p>Conduct day and night surveillance with multipurpose tools.</p>
-        </div>
-        <div class="pagination">
-            <button class="prev" onclick="navigate(-1)">&#10094;</button>
-            <span class="page-indicator">4/4</span>
-            <button class="next" onclick="navigate(1)">&#10095;</button>
+            <button>Surveillance</button>
         </div>
     </div>
 </div>
 
-<script src="{% static 'drone/js/index.js' %}"></script>
 <script>
-    let currentPage = 1;
-    const totalPages = document.querySelectorAll('.section').length;
-
-    function updatePageIndicator() {
-        document.querySelector('.page-indicator').textContent = `${currentPage}/${totalPages}`;
-    }
-
-    function navigate(direction) {
-        const sections = document.querySelectorAll('.section');
-        sections[currentPage - 1].style.display = 'none';
-        currentPage += direction;
-
-        if (currentPage < 1) {
-            currentPage = totalPages;
-        } else if (currentPage > totalPages) {
-            currentPage = 1;
-        }
-
-        sections[currentPage - 1].style.display = 'block';
-        updatePageIndicator();
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
-        const sections = document.querySelectorAll('.section');
-        sections.forEach((section, index) => {
-            if (index !== 0) section.style.display = 'none';
-        });
-        updatePageIndicator();
-    });
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('close-btn');
+        const languageSettings = document.getElementById('language-settings');
+        const mapSettings = document.getElementById('map-settings');
 
+        // Toggle sidebar visibility
+        hamburgerMenu.addEventListener('click', () => {
+            sidebar.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.style.display = 'none';
+        });
+
+        // Handle actions for language and map settings (placeholders for future code)
+        languageSettings.addEventListener('click', () => {
+            alert("Language Settings clicked");
+        });
+
+        mapSettings.addEventListener('click', () => {
+            alert("Map Settings clicked");
+        });
+    });
 </script>
 
 </body>

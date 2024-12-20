@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Management</title>
+    <link rel="stylesheet" href="{% static 'drone/css/index__.css' %}">
+    <link rel="stylesheet" href="{% static 'drone/css/pagination.css' %}">
+    <script src="https://kit.fontawesome.com/35c881c056.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <span style="font-size: smaller">Drone Management</span>
+    <div class="hamburger-menu">
+        <i class="fas fa-bars"></i>
+        <div class="dropdown-menu">
+            <button id="language-settings">Language Settings</button>
+            <button onclick="alert('Map Settings Coming Soon')">Map Settings</button>
+        </div>
+    </div>
+</nav>
+
+<div id="language-modal" class="modal card">
+    <div class="modal-content">
+        <h3>Select Your Language</h3>
+        <div style="display: flex; justify-content: space-between">
+            <button data-language="en">English</button>
+            <button data-language="hi">हिंदी</button>
+            <button data-language="te">తెలుగు</button>
+        </div>
+    </div>
+</div>
+
+<div class="scroll-container">
+    <!-- Sections go here -->
+    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');" loading="lazy">
+        <div class="overlay-content">
+            <h3>Monitor Area</h3>
+            <p>Oversee specific regions for real-time tracking.</p>
+            <p>Crop Maturity Analysis: Evaluate crop maturity levels for optimal harvest timing.</p>
+        </div>
+        <div class="pagination">
+            <button class="prev" onclick="navigate(-1)">&#10094;</button>
+            <span class="page-indicator">1/4</span>
+            <button class="next" onclick="navigate(1)">&#10095;</button>
+        </div>
+    </div>
+    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
+        <div class="overlay-content">
+            <h3>Disease Detection</h3>
+            <p>Spot and diagnose crop diseases quickly.</p>
+            <p>Remedy and Affected Area analysis: Plan remedies and estimate affected regions accurately.</p>
+        </div>
+        <div class="pagination">
+            <button class="prev" onclick="navigate(-1)">&#10094;</button>
+            <span class="page-indicator">2/4</span>
+            <button class="next" onclick="navigate(1)">&#10095;</button>
+        </div>
+    </div>
+    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
+        <div class="overlay-content">
+            <h3>Draw Path for Spray</h3>
+            <p>Design efficient routes for spraying operations.</p>
+            <p>Autonomous Flight and Spray: Set viewpoints for automated spraying and flights.</p>
+            <p>Field Mapping: Create detailed field maps for comprehensive analysis.</p>
+        </div>
+        <div class="pagination">
+            <button class="prev" onclick="navigate(-1)">&#10094;</button>
+            <span class="page-indicator">3/4</span>
+            <button class="next" onclick="navigate(1)">&#10095;</button>
+        </div>
+    </div>
+    <div class="section" style="background-image: url('{% static "drone/img/surveillance.jpg" %}');">
+        <div class="overlay-content">
+            <h3>Surveillance</h3>
+            <p>Conduct day and night surveillance with multipurpose tools.</p>
+        </div>
+        <div class="pagination">
+            <button class="prev" onclick="navigate(-1)">&#10094;</button>
+            <span class="page-indicator">4/4</span>
+            <button class="next" onclick="navigate(1)">&#10095;</button>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'drone/js/index.js' %}"></script>
+<script>
+    let currentPage = 1;
+    const totalPages = document.querySelectorAll('.section').length;
+
+    function updatePageIndicator() {
+        document.querySelector('.page-indicator').textContent = `${currentPage}/${totalPages}`;
+    }
+
+    function navigate(direction) {
+        const sections = document.querySelectorAll('.section');
+        sections[currentPage - 1].style.display = 'none';
+        currentPage += direction;
+
+        if (currentPage < 1) {
+            currentPage = totalPages;
+        } else if (currentPage > totalPages) {
+            currentPage = 1;
+        }
+
+        sections[currentPage - 1].style.display = 'block';
+        updatePageIndicator();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach((section, index) => {
+            if (index !== 0) section.style.display = 'none';
+        });
+        updatePageIndicator();
+    });
+
+</script>
+
+</body>
+</html>
