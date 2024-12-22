@@ -111,6 +111,14 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            function isMobile() {
+                return /Mobi|Android/i.test(navigator.userAgent);
+            }
+
+            if (!isMobile()) {
+                document.body.innerHTML = `<pre style='margin:20px;font-size: xxx-large'>Please open this page on a mobile device to view the content.</pre>`;
+                return false;
+            }
             const swipeLinks = document.querySelectorAll('[data-swipe]'); // Select all elements with data-swipe attribute
             const swipePath = document.querySelector('.swipe-path');
             const swipeContainer = document.querySelector('.swipe-container');
