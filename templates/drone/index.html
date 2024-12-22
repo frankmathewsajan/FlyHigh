@@ -48,29 +48,52 @@
 </div>
 
 <div class="scroll-container"><!-- Area Monitoring and Crop Maturity Analysis -->
-    <div class="section" id="monitor-maturity">
-        <h3 class="section-title">AI-Powered Real-Time Monitoring, Disease Detection, and Crop Maturity Analysis</h3>
-        <div class="card">
-            <p>Leverage AI to monitor crop health and development across specific regions in real-time. Evaluate crop
-                maturity precisely to identify the ideal harvest window. Detect diseases early, estimate affected areas,
-                and implement tailored remedies for better yields.</p>
-            <button>Monitor and Analyze</button>
+
+    <div class="section" id="monitor-maturity" style="display: flex;justify-content: space-between">
+
+
+    </div>
+
+    <div class="section" id="monitor-maturity" style="display: flex;justify-content: space-between">
+        <div class="card margin-top-0" style="background-color: rgba(0,0,0,0.6);">
+            <h1 style="font-size: 1.2rem; color: #72EA9F;">
+                Real-Time Monitoring & Crop Maturity Detection
+            </h1>
+            <p style="margin-top: 10px;">
+                Utilize AI for real-time monitoring of crop health and maturity. Detect diseases early, assess affected
+                areas, and optimize harvest timing for improved yields.
+            </p>
         </div>
+        <button style="margin-bottom: calc(20vh)">Monitor & Analyze</button>
+
+
     </div>
 
     <!-- Spray Planning and Autonomous Flight -->
     <div class="section" id="spray-flight">
-        <h3 class="section-title">Route Optimization for Spraying and Autonomous Drone Flights</h3>
-        <div class="card">
-            <p>Utilize AI for efficient route planning, enabling precise and automated spraying operations. Define key
-                waypoints for drones to perform autonomous and optimized spraying with minimal resource waste.</p>
-            <button>Plan Route</button>
+        <div class="card margin-top-0" style="background-color: rgba(0,0,0,0.6);">
+            <h1 style="font-size: 1.2rem; color: #72EA9F;">
+                Drone Route Optimization for Spraying
+            </h1>
+            <p style="margin-top: 10px;">
+                AI-driven route planning enables autonomous drone spraying, minimizing resource use and improving
+                efficiency.
+            </p>
         </div>
+        <div class="swipe-container">
+            <a class="bottom-right" style="color: white!important;" data-swipe="{% url 'index' %}">
+                <i class="fa-solid fa-caret-up"></i><br>
+                Swipe Up to Route
+            </a>
+            <div class="swipe-path"></div>
+        </div>
+
+
     </div>
 
     <!-- Surveillance -->
     <div class="section" id="surveillance">
-        <div class="card margin-top-0">
+        <div class="card margin-top-0" style="background-color: rgba(0,0,0,0.6)">
             <h1 style="font-size: 1.5rem;color: #72EA9F;">
                 Day and Night Surveillance with Advanced AI Tools
             </h1>
@@ -78,9 +101,8 @@
                 agricultural management.</p>
         </div>
         <div class="swipe-container">
-            <a class="bottom-right" id="swipeUpLink">
-                <i class="fa-solid fa-caret-up"></i><br>
-                Swipe Up
+            <a class="bottom-right" style="text-decoration: none" href="{% url 'map' %}">
+                Start >>>
             </a>
             <div class="swipe-path"></div>
         </div>
@@ -89,44 +111,47 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const swipeLink = document.getElementById('swipeUpLink');
+            const swipeLinks = document.querySelectorAll('[data-swipe]'); // Select all elements with data-swipe attribute
             const swipePath = document.querySelector('.swipe-path');
             const swipeContainer = document.querySelector('.swipe-container');
-            let startY = 0;
-            let endY = 0;
-
             const maxSwipeDistance = swipePath.offsetHeight; // Max height to swipe
 
-            swipeLink.addEventListener('touchstart', function (e) {
-                startY = e.touches[0].clientY; // Record the start Y position
-            });
+            swipeLinks.forEach(swipeLink => {
+                let startY = 0;
+                let endY = 0;
 
-            swipeLink.addEventListener('touchmove', function (e) {
-                endY = e.touches[0].clientY; // Record the end Y position
-                const swipeDistance = Math.max(0, startY - endY);
+                swipeLink.addEventListener('touchstart', function (e) {
+                    startY = e.touches[0].clientY; // Record the start Y position
+                });
 
-                // Move the button proportionally to the swipe distance, within limits
-                const progress = Math.min(swipeDistance / maxSwipeDistance, 1);
-                swipeLink.style.bottom = `calc(30% + ${progress * 30}%)`; // Adjust based on path height
-                swipeLink.style.transform = `scale(${1 + progress * 0.3})`; // Smooth scaling
-            });
+                swipeLink.addEventListener('touchmove', function (e) {
+                    endY = e.touches[0].clientY; // Record the end Y position
+                    const swipeDistance = Math.max(0, startY - endY);
 
-            swipeLink.addEventListener('touchend', function () {
-                const swipeDistance = Math.max(0, startY - endY);
-                if (swipeDistance >= maxSwipeDistance * 0.7) { // Trigger at 90% swipe distance
-                    swipeLink.classList.add('move-up'); // Add class for animation
+                    // Move the button proportionally to the swipe distance, within limits
+                    const progress = Math.min(swipeDistance / maxSwipeDistance, 1);
+                    swipeLink.style.bottom = `calc(30% + ${progress * 30}%)`; // Adjust based on path height
+                    swipeLink.style.transform = `scale(${1 + progress * 0.3})`; // Smooth scaling
+                });
 
-                    // Redirect after animation ends
-                    setTimeout(() => {
-                        window.location.assign("{% url 'map' %}"); // Replace with your target URL
-                    }, 400); // Matches the CSS transition duration
-                } else {
-                    // Reset position if swipe wasn't sufficient
-                    swipeLink.style.bottom = '30%';
-                    swipeLink.style.transform = 'scale(1)';
-                }
+                swipeLink.addEventListener('touchend', function () {
+                    const swipeDistance = Math.max(0, startY - endY);
+                    if (swipeDistance >= maxSwipeDistance * 0.7) { // Trigger at 90% swipe distance
+                        swipeLink.classList.add('move-up'); // Add class for animation
+
+                        // Redirect after animation ends
+                        setTimeout(() => {
+                            window.location.assign(swipeLink.getAttribute('data-swipe')); // Use the data-swipe attribute value as URL
+                        }, 400); // Matches the CSS transition duration
+                    } else {
+                        // Reset position if swipe wasn't sufficient
+                        swipeLink.style.bottom = '30%';
+                        swipeLink.style.transform = 'scale(1)';
+                    }
+                });
             });
         });
+
     </script>
 
 
@@ -134,6 +159,7 @@
 <!-- Pagination Dots -->
 <div class="pagination-dots">
     <span class="dot active"></span>
+    <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
