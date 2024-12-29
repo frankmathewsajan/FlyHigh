@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Visualization</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <style>
+        #map {
+            height: 500px; /* Adjust as needed */
+            width: 100%;
+        }
+
+        #loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div id="loading">Loading map data...</div>
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    // Global Variables
+    let DATA = {}; // Global variable to hold backend data
+    const mapCenter = [16.4819, 80.5083]; // VIT AP Campus coordinates
+    const mapZoom = 16; // Default zoom level
+
+    // Initialize the map
+    const map = L.map('map').setView(mapCenter, mapZoom);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    // Initialize layer groups
+    let mstLayer = L.layerGroup().addTo(map);
+    let droneLayer = L.layerGroup().addTo(map);
+    let markerLayer = L.layerGroup().addTo(map); // Layer for markers
+
+    // Function to calculate offset for parallel paths
+    const calculateOffset = (p1, p2, offsetMeters) => {
+        const earthRadius = 6371000; // Earth radius in meters
+        const toRad = (deg) => (deg * Math.PI) / 180;
+        const toDeg = (rad) => (rad * 180) / Math.PI;
+
+        const dx = p2[1] - p1[1];
+        const dy = p2[0] - p1[0];
+        const length = Math.sqrt(dx * dx + dy * dy);
+
+        const nx = (dy / length) * offsetMeters / earthRadius * (180 / Math.PI);
+        const ny = -(dx / length) * offsetMeters / (earthRadius * Math.cos(toRad(p1[0]))) * (180 / Math.PI);
+
+        const offsetP1 = [p1[0] + ny, p1[1] + nx];
+        const offsetP2 = [p2[0] + ny, p2[1] + nx];
+        return [offsetP1, offsetP2];
+    };
+
+    // Function to recreate the map using backend data
+    const recreateMap = (data) => {
+        // Clear existing layers
+        mstLayer.clearLayers();
+        droneLayer.clearLayers();
+        markerLayer.clearLayers();
+
+        // Draw MST paths
+        data.mst.forEach(edge => {
+            L.polyline(edge, {color: 'blue'}).addTo(mstLayer);
+        });
+
+        // Draw offset paths (e.g., for drone paths)
+        data.mst.forEach(edge => {
+            const [p1, p2] = edge;
+            const offsetEdge = calculateOffset(p1, p2, 5); // 5 meters offset
+            L.polyline(offsetEdge, {color: 'green', dashArray: '5, 10'}).addTo(droneLayer);
+        });
+
+        // Add markers
+        data.markers.forEach(marker => {
+            const [lat, lng, label] = marker; // Assuming marker is [latitude, longitude, label]
+            L.marker([lat, lng]).addTo(markerLayer).bindPopup(label || "No Label");
+        });
+
+        // Adjust map bounds to fit new data
+        const allCoordinates = [
+            ...data.mst.flat(),
+            ...data.drone_path.flat(),
+            ...data.markers.map(marker => [marker[0], marker[1]]),
+        ];
+        const bounds = L.latLngBounds(allCoordinates);
+        if (allCoordinates.length > 0) map.fitBounds(bounds);
+    };
+
+    // Fetch data from the backend and render the map
+    const fetchDataAndRender = () => {
+        document.getElementById('loading').style.display = 'block'; // Show loading indicator
+        fetch('', {method: 'POST'}) // Replace with actual API endpoint
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading').style.display = 'none'; // Hide loading indicator
+                DATA = data; // Store data in global variable
+                recreateMap(data); // Render map with new data
+            })
+            .catch(error => {
+                document.getElementById('loading').style.display = 'none'; // Hide loading indicator
+                console.error('Error fetching data:', error);
+                alert('Failed to load map data. Please try again later.');
+            });
+    };
+
+    // Fetch and render map data on page load
+    document.addEventListener('DOMContentLoaded', fetchDataAndRender);
+</script>
+
+</body>
+</html>

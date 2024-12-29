@@ -1,8 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shortest Path</title>
+    <title>Covered Region Path</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -83,6 +84,13 @@
                 width: 25%;
             }
         }
+
+        .distance-label {
+            font-size: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
     </style>
 </head>
 <body>
@@ -94,7 +102,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary " data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Drone Mapper</a>
+        <a class="navbar-brand" href="#">Region Mapper</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -119,95 +127,14 @@
                         <textarea name="coordinates" id="coordinates" hidden></textarea>
                         <a class="nav-link" href="#"
                            onclick="document.getElementById('coordinates-form').dispatchEvent(new Event('submit', { cancelable: true }));">Calculate
-                            Shortest Path</a></form>
+                            Region</a></form>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 <div id="map"></div>
-<script>
-    // Center map at VIT AP Campus
-    const vitApLat = 16.4819, vitApLng = 80.5083;
-    const map = L.map('map').setView([vitApLat, vitApLng], 32); // Zoom level 16 for campus view
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    // Store clicked points as coordinates
-    let coordinates = [];
-    const markers = [];
-    let mstLayer = L.layerGroup().addTo(map);
-    let droneLayer = L.layerGroup().addTo(map);
-
-    map.on('click', function (e) {
-        const marker = L.marker(e.latlng).addTo(map);
-        marker.on('click', function () {
-            map.removeLayer(marker);
-            const index = coordinates.findIndex(coord => coord[0] === e.latlng.lat && coord[1] === e.latlng.lng);
-            if (index > -1) coordinates.splice(index, 1);
-            document.getElementById('coordinates').value = JSON.stringify(coordinates);
-        });
-        markers.push(marker);
-        coordinates.push([e.latlng.lat, e.latlng.lng]);
-        document.getElementById('coordinates').value = JSON.stringify(coordinates);
-    });
-
-    // Clear all markers
-    document.getElementById('clear-markers').addEventListener('click', () => {
-        markers.forEach(marker => map.removeLayer(marker));
-        coordinates = [];
-        document.getElementById('coordinates').value = JSON.stringify(coordinates);
-    });
-
-    // Clear paths
-    document.getElementById('clear-paths').addEventListener('click', () => {
-        mstLayer.clearLayers();
-        droneLayer.clearLayers();
-    });
-
-    // Function to calculate offset for parallel path
-    const calculateOffset = (p1, p2, offsetMeters) => {
-        const earthRadius = 6371000; // Earth radius in meters
-        const toRad = (deg) => (deg * Math.PI) / 180;
-        const toDeg = (rad) => (rad * 180) / Math.PI;
-
-        const dx = p2[1] - p1[1];
-        const dy = p2[0] - p1[0];
-        const length = Math.sqrt(dx * dx + dy * dy);
-
-        const nx = (dy / length) * offsetMeters / earthRadius * (180 / Math.PI);
-        const ny = -(dx / length) * offsetMeters / (earthRadius * Math.cos(toRad(p1[0]))) * (180 / Math.PI);
-
-        const offsetP1 = [p1[0] + ny, p1[1] + nx];
-        const offsetP2 = [p2[0] + ny, p2[1] + nx];
-        return [offsetP1, offsetP2];
-    };
-
-    // Handle form submission
-    document.getElementById('coordinates-form').onsubmit = function (event) {
-        event.preventDefault();
-        fetch('', {
-            method: 'POST',
-            headers: {'X-CSRFToken': '{{ csrf_token }}'},
-            body: new FormData(this),
-        })
-            .then(response => response.json())
-            .then(data => {
-                
-                mstLayer.clearLayers();
-                droneLayer.clearLayers();
-
-                data.mst.forEach(edge => {
-                    L.polyline(edge, {color: 'blue'}).addTo(mstLayer);
-                });
-
-                data.mst.forEach(edge => {
-                    const [p1, p2] = edge;
-                    const offsetEdge = calculateOffset(p1, p2, 5); // 5 meters offset
-                    L.polyline(offsetEdge, {color: 'green', dashArray: '5, 10'}).addTo(droneLayer);
-                });
-            });
-    };
-</script>
+<script src="{% static 'drone/js/enclosed.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
