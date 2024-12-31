@@ -1,3 +1,11 @@
+document.querySelectorAll('.form-range').forEach(slider => {
+    slider.addEventListener('input', function () {
+        const valueDisplay = document.getElementById(`${this.id}-value`);
+        valueDisplay.textContent = this.value + (this.id === 'speed' ? ' mph' : this.id === 'altitude' || this.id === 'distance' ? ' m' : this.id === 'sidelap' || this.id === 'frontlap' ? '%' : '');
+    });
+});
+
+
 // Initialize map at VIT AP Campus
 const vitApLat = 16.4819, vitApLng = 80.5083;
 const map = L.map('map').setView([vitApLat, vitApLng], 16); // Zoom level 16 for campus view
@@ -51,14 +59,12 @@ document.getElementById('clear-markers').addEventListener('click', () => {
 document.getElementById('clear-paths').addEventListener('click', () => {
     mstLayer.clearLayers();
 });
-
-// Handle form submission to calculate and display enclosed region
 document.getElementById('coordinates-form').onsubmit = function (event) {
     event.preventDefault();
 
     fetch('', {
         method: 'POST',
-        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+        headers: {'X-CSRFToken': '{{ csrf_token }}'},
         body: new FormData(this),
     })
         .then(response => response.json())
@@ -72,12 +78,31 @@ document.getElementById('coordinates-form').onsubmit = function (event) {
 
             const enclosedRegion = data.enclosed_region;
 
-            // Draw the enclosed region with dashed lines and thin borders
+            // Define a hatching pattern
+            const hatchPattern = new L.Pattern({
+                width: 10,             // Width of each pattern tile
+                height: 10,            // Height of each pattern tile
+                patternUnits: 'userSpaceOnUse'
+            });
+
+            // Add a diagonal stripe shape to the pattern
+            const stripe = new L.PatternPath({
+                d: 'M0 10 L10 0',      // Diagonal line from bottom-left to top-right
+                stroke: true,          // Enable stroke
+                strokeColor: 'blue',   // Hatching line color
+                strokeWidth: 1,        // Line thickness
+                opacity: 0.5           // Line opacity
+            });
+
+            hatchPattern.addShape(stripe); // Add the stripe to the pattern
+            hatchPattern.addTo(map);       // Add the pattern to the map
+
+            // Draw the enclosed region with the hatching pattern
             L.polygon(enclosedRegion, {
-                color: 'blue',
-                weight: 1,       // Thin border
-                fillColor: 'none', // No solid fill
-                dashArray: '5, 5' // Dashed shading
+                color: 'red',            // Solid red border
+                weight: 2,               // Border thickness
+                fillPattern: hatchPattern, // Apply the hatching pattern
+                fillOpacity: 1           // Ensure hatching pattern is fully visible
             }).addTo(mstLayer);
 
             // Add distance labels between consecutive points
